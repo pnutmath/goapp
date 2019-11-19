@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        run:goapp
+        run: goapp
     spec:
       containers:
-      - image: gcr.io/kube-assimilate/goapp:latest
-        name: goapp
-        ports:
-        - containerPort: 8080
+        - image: gcr.io/kube-assimilate/goapp:latest
+          name: goapp
+          ports:
+            - containerPort: 8080

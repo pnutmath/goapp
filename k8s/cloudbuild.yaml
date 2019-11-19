@@ -1,41 +1,41 @@
 steps:
-#step 1
-- name: 'gcr.io/cloud-builders/docker' 
-  entrypoint: 'bash'
-  args: [
-   '-c', 
-   'docker pull gcr.io/kube-assimilate/goapp:latest || exit 0'
-  ]
-#step 2
-- name: gcr.io/cloud-builders/docker
-  args: [
-   'build', 
-   '-t', 
-   'gcr.io/kube-assimilate/goapp:$TAG_NAME',
-   '-t', 
-   'gcr.io/kube-assimilate/goapp:latest',
-   '.'
-  ]
-#step 3
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: ['apply', '-f', 'k8s/']
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=abhay-cluster'
-#step 4
-- name: 'gcr.io/cloud-builders/kubectl'
-  args: [
-   'set', 
-   'image', 
-   'deployment', 
-   '<app-name>', 
-   '<app-name>=gcr.io/kube-assimilate/goapp:$TAG_NAME'
-  ]
-  env:
-  - 'CLOUDSDK_COMPUTE_ZONE=asia-south1-a'
-  - 'CLOUDSDK_CONTAINER_CLUSTER=abhay-cluster'
+  #step 1
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args: ["-c", "docker pull gcr.io/kube-assimilate/goapp:latest || exit 0"]
+  #step 2
+  - name: gcr.io/cloud-builders/docker
+    args:
+      [
+        "build",
+        "-t",
+        "gcr.io/kube-assimilate/goapp:$TAG_NAME",
+        "-t",
+        "gcr.io/kube-assimilate/goapp:latest",
+        ".",
+      ]
+  #step 3
+  - name: "gcr.io/cloud-builders/kubectl"
+    args: ["apply", "-f", "k8s/"]
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=asia-south1-a"
+      - "CLOUDSDK_CONTAINER_CLUSTER=abhay-cluster"
+  #step 4
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      [
+        "set",
+        "image",
+        "deployment",
+        "<app-name>",
+        "<app-name>=gcr.io/kube-assimilate/goapp:$TAG_NAME",
+      ]
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=asia-south1-a"
+      - "CLOUDSDK_CONTAINER_CLUSTER=abhay-cluster"
 # push images to Google Container Registry with tags
-images: [
-   'gcr.io/kube-assimilate/goapp:$TAG_NAME',
-   'gcr.io/kube-assimilate/goapp:latest'
+images:
+  [
+    "gcr.io/kube-assimilate/goapp:$TAG_NAME",
+    "gcr.io/kube-assimilate/goapp:latest",
   ]

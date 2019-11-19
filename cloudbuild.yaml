@@ -27,8 +27,8 @@ steps:
         "set",
         "image",
         "deployment",
-        "<app-name>",
-        "<app-name>=gcr.io/kube-assimilate/goapp:$TAG_NAME",
+        "goapp",
+        "goapp=gcr.io/kube-assimilate/goapp:$TAG_NAME",
       ]
     env:
       - "CLOUDSDK_COMPUTE_ZONE=asia-south1-a"
